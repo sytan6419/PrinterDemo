@@ -20,6 +20,7 @@ namespace PrinterDemo
 
             // init serial com port at here
             // Todo: set the arduino COM port at here. Check at device manager
+            /*
             SerialPort mySerialPort = new SerialPort("COM1");
 
             mySerialPort.BaudRate = 9600;
@@ -30,6 +31,7 @@ namespace PrinterDemo
             mySerialPort.RtsEnable = true;
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             mySerialPort.Open();
+            */
         }
 
         private void btn_print_Click(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace PrinterDemo
             TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
             TSCLIB_DLL.closeport();                                                             //Close specified printer driver 
         }
-
+        /*
         private static void DataReceivedHandler(
                             object sender,
                             SerialDataReceivedEventArgs e)
@@ -70,5 +72,6 @@ namespace PrinterDemo
                 TSCLIB_DLL.closeport();
             }
         }
+        */
     }
 }
