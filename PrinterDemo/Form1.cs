@@ -55,7 +55,7 @@ namespace PrinterDemo
             string indata = sp.ReadExisting();
 
             // If received "Detected!" from arduino Port
-            if (indata == "Detected!")
+            if (indata == "D")
             {
                 // Setup printer to print something
                 TSCLIB_DLL.openport("TSC TDP-225");                                           //Open specified printer driver
