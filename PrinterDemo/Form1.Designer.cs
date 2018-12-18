@@ -33,6 +33,10 @@
             this.btn_print = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM5";
+            // 
             // btn_print
             // 
             this.btn_print.Location = new System.Drawing.Point(199, 112);

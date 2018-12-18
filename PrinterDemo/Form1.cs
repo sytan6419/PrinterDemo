@@ -20,35 +20,32 @@ namespace PrinterDemo
 
             // init serial com port at here
             // Todo: set the arduino COM port at here. Check at device manager
-            /*
-            SerialPort mySerialPort = new SerialPort("COM1");
+            try
+            {
+                SerialPort mySerialPort = new SerialPort("COM5");
 
-            mySerialPort.BaudRate = 9600;
-            mySerialPort.Parity = Parity.None;
-            mySerialPort.StopBits = StopBits.One;
-            mySerialPort.DataBits = 8;
-            mySerialPort.Handshake = Handshake.None;
-            mySerialPort.RtsEnable = true;
-            mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
-            mySerialPort.Open();
-            */
+                mySerialPort.BaudRate = 9600;
+                mySerialPort.Parity = Parity.None;
+                mySerialPort.StopBits = StopBits.One;
+                mySerialPort.DataBits = 8;
+                mySerialPort.Handshake = Handshake.None;
+                mySerialPort.RtsEnable = true;
+                mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+                mySerialPort.Open();
+            }
+            catch (Exception)
+            {
+                // Error handling to remind user to reset arduino
+                MessageBox.Show("COM port not detected! Pls reset COM at Arduino!", "Error", MessageBoxButtons.OK);
+                System.Environment.Exit(999);
+            }
         }
 
         private void btn_print_Click(object sender, EventArgs e)
         {
-            //TSCLIB_DLL.about();                                                                 //Show the DLL version
-            TSCLIB_DLL.openport("TSC TDP-225");                                           //Open specified printer driver
-            TSCLIB_DLL.setup("100", "63.5", "4", "8", "0", "0", "0");                           //Setup the media size and sensor type info
-            TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-            TSCLIB_DLL.barcode("100", "100", "128", "100", "1", "0", "2", "2", "Barcode Test"); //Drawing barcode
-            TSCLIB_DLL.printerfont("100", "250", "3", "0", "1", "1", "Print Font Test");        //Drawing printer font
-            TSCLIB_DLL.windowsfont(100, 300, 24, 0, 0, 0, "ARIAL", "Windows Arial Font Test");  //Draw windows font
-            TSCLIB_DLL.downloadpcx("UL.PCX", "UL.PCX");                                         //Download PCX file into printer
-            TSCLIB_DLL.sendcommand("PUTPCX 100,400,\"UL.PCX\"");                                //Drawing PCX graphic
-            TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
-            TSCLIB_DLL.closeport();                                                             //Close specified printer driver 
+            PrintDemoLabel();
         }
-        /*
+   
         private static void DataReceivedHandler(
                             object sender,
                             SerialDataReceivedEventArgs e)
@@ -57,21 +54,24 @@ namespace PrinterDemo
             string indata = sp.ReadExisting();
 
             // If received "Detected!" from arduino Port
-            if (indata == "D")
+            if (indata.Contains("D"))
             {
-                // Setup printer to print something
-                TSCLIB_DLL.openport("TSC TDP-225");                                           //Open specified printer driver
-                TSCLIB_DLL.setup("100", "63.5", "4", "8", "0", "0", "0");                           //Setup the media size and sensor type info
-                TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-                TSCLIB_DLL.barcode("100", "100", "128", "100", "1", "0", "2", "2", "Barcode Test"); //Drawing barcode
-                TSCLIB_DLL.printerfont("100", "250", "3", "0", "1", "1", "Print Font Test");        //Drawing printer font
-                TSCLIB_DLL.windowsfont(100, 300, 24, 0, 0, 0, "ARIAL", "Windows Arial Font Test");  //Draw windows font
-                TSCLIB_DLL.downloadpcx("UL.PCX", "UL.PCX");                                         //Download PCX file into printer
-                TSCLIB_DLL.sendcommand("PUTPCX 100,400,\"UL.PCX\"");                                //Drawing PCX graphic
-                TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
-                TSCLIB_DLL.closeport();
+                PrintDemoLabel();
+                // Add a handling here to stop printer from keep printing.
             }
         }
-        */
+
+        // Function to perform printing module!
+        private static void PrintDemoLabel()
+        {
+            TSCLIB_DLL.openport("TSC TDP-225");                                                 //Open specified printer driver
+            TSCLIB_DLL.setup("25", "400", "1", "8", "1", "6", "250");                           //Setup the media size and sensor type info
+            TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
+            TSCLIB_DLL.barcode("50", "450", "128", "100", "1", "270", "2", "2", "Brady123");    //Drawing barcode
+            TSCLIB_DLL.printerfont("150", "480", "5", "90", "1", "1", "BRADY");                 //Drawing printer font
+            TSCLIB_DLL.sendcommand("QRCODE 30,0,M,7,M,0,M2,S1,\"ABRADY123\"");                  //Draw QR Code
+            TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
+            TSCLIB_DLL.closeport();                                                             //Close specified printer driver
+        }
     }
 }
