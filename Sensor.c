@@ -1,50 +1,50 @@
 /* switch
-   Each time the input pin goes from LOW to HIGH (e.g. because of a push-button
-   press), the output pin is toggled from LOW to HIGH or HIGH to LOW.  There's
-   a minimum delay between toggles to debounce the circuit (i.e. to ignore
-   noise).
-*/
+ Each time the input pin goes from LOW to HIGH (e.g. because of a push-button
+ press), the output pin is toggled from LOW to HIGH or HIGH to LOW.  There's
+ a minimum delay between toggles to debounce the circuit (i.e. to ignore
+ noise).
+ */
 
-void setup(){
-}
+// this constant won't change:
+const int  buttonPin = 8;    // the pin that the pushbutton is attached to
+const int ledPin = 13;       // the pin that the LED is attached to
 
-void loop(){
-}
-
-
-int inPin = 8;         // the number of the input pin
-int state = HIGH;      // the current state of the output pin
-int reading;           // the current reading from the input pin
-int previous = LOW;    // the previous reading from the input pin
-
-// the follow variables are long's because the time, measured in miliseconds,
-// will quickly become a bigger number than can be stored in an int.
-unsigned long time = 0;           // the last time the output pin was toggled
-unsigned long debounce = 200UL;   // the debounce time, increase if the output flickers
+// Variables will change:
+int buttonState = 0;         // current state of the button
+int lastButtonState = 0;     // previous state of the button
 
 void setup()
 {
-  pinMode(inPin,  INPUT);
-  Serial.begin(9600); // Init Serial COM communication
+  // initialize the button pin as a input:
+  pinMode(buttonPin, INPUT);
+  // initialize the LED as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize serial communication:
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  reading = digitalRead(inPin);
-
   // if the input just went from LOW and HIGH and we've waited long enough
   // to ignore any noise on the circuit, toggle the output pin and remember
   // the time
-  if (reading == HIGH && previous == LOW && millis() - time > debounce)
-  {
-    if (state == HIGH)
-      state = LOW;
-    else
-      state = HIGH;
+  // read the pushbutton input pin:
+  buttonState = !digitalRead(buttonPin);
 
-    time = millis();
-    // sending "D" to ask printer to print
-  	Serial.write("D"); // send a byte with the value 45
+  // compare the buttonState to its previous state
+  if (buttonState != lastButtonState) {
+    // if the state has changed, increment the counter
+    if (buttonState == LOW){
+      // if the current state is HIGH then the button went from off to on:
+      Serial.write('D');
+    } 
+    else {
+      // if the current state is LOW then the button went from on to off:
+      //Serial.println("off");
+    }
+    // Delay a little bit to avoid bouncing
+    delay(200);
   }
-  previous = reading;
+  // save the current state as the last state, for next time through the loop
+  lastButtonState = buttonState;
 }
