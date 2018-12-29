@@ -42,16 +42,16 @@ namespace PrinterDemo
 
             // Update the label of the gate
             LABEL_GATE_NO.Text = getGateID();
-
-            // check if DB (by date) exist, if yes, update the counter.
-            // else, set counter to 0 and write to DB.
         }
 
+        // Reprint button event
         private void btn_print_Click(object sender, EventArgs e)
         {
+            // If user press reprint, the counter should not increase
             PrintDemoLabel(true);
         }
 
+        // Handle serial com incoming data
         private void DataReceivedHandler(
                             object sender,
                             SerialDataReceivedEventArgs e)
@@ -59,12 +59,11 @@ namespace PrinterDemo
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadExisting();
 
-            // If received "Detected!" from arduino Port
+            // If received "D" from arduino Port, sensor is triggered.
             if (indata.Contains("D"))
             {
-
+                // If sensor detect door open, update the counter to increase by 1
                 PrintDemoLabel(false);
-                // Add a handling here to stop printer from keep printing.
             }
         }
 
@@ -78,17 +77,16 @@ namespace PrinterDemo
             // Update the label for counter.
             // if reprtint, do not increment the counter.
             String printformat = UpdateDB(reprint);
-            
+
             TSCLIB_DLL.openport("TSC TDP-225");                                                 //Open specified printer driver
             TSCLIB_DLL.setup("25", "400", "1", "8", "1", "6", "250");                           //Setup the media size and sensor type info
             TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-            TSCLIB_DLL.barcode("50", "450", "128", "100", "1", "270", "2", "2", "Brady123");    //Drawing barcode
-            TSCLIB_DLL.printerfont("150", "480", "5", "90", "1", "1", "BRADY");                 //Drawing printer font
-            TSCLIB_DLL.sendcommand("QRCODE 30,0,M,7,M,0,M2,S1,\"ABRADY123\"");                  //Draw QR Code
+            TSCLIB_DLL.barcode("50", "450", "128", "100", "1", "270", "2", "2", printformat);   //Drawing barcode
+            TSCLIB_DLL.printerfont("150", "480", "5", "90", "1", "1", printformat);             //Drawing printer font
+            TSCLIB_DLL.sendcommand($"QRCODE 30,0,M,7,M,0,M2,S1,\"A{printformat}\"");            //Draw QR Code
             TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
             TSCLIB_DLL.closeport();                                                             //Close specified printer driver
-
-        }
+    }
 
         private String getGateID()
         {
@@ -97,9 +95,18 @@ namespace PrinterDemo
             {
                 //Pass the file path and file name to the StreamReader constructor
                 gate = System.IO.File.ReadAllText("GateID.txt");
+
+                // If somebody alter the file, delete the file 
+                // and prompt user to update the gate ID
+                if (gate.Contains(Environment.NewLine))
+                {
+                    File.Delete("GateID.txt");
+                    ShowMyDialogBox();
+                }
             }
             catch (Exception e)
             {
+                // If file not file, prompt user to update GateID
                 Console.WriteLine("Exception: " + e.Message);
                 ShowMyDialogBox();
             }
@@ -163,7 +170,11 @@ namespace PrinterDemo
                         {
                             int db_count = reader.GetInt32(2);
                             count = db_count;
-                            count += 1;
+                            // if not reprint, only increase the counter
+                            if (reprint == 0)
+                            {
+                                count += 1;
+                            }
                             LABEL_COUNT.Text = count.ToString();
                         }
                     }
@@ -198,7 +209,7 @@ namespace PrinterDemo
             }
             else
             {
-                this.LABEL_GATE_NO.Text = "Cancelled";
+                this.LABEL_GATE_NO.Text = "Problem! Please contact support!";
             }
             testDialog.Dispose();
         }
