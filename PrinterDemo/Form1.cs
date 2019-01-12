@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO.Ports;
 using System.Data.SQLite;
 using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PrinterDemo
 {
     public partial class Form1 : Form
     {
+        private SerialPort mySerialPort;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +18,7 @@ namespace PrinterDemo
             // init serial com port at here
             try
             {
-                SerialPort mySerialPort = new SerialPort("COM5");
+                mySerialPort = new SerialPort("COM5");
 
                 mySerialPort.BaudRate = 9600;
                 mySerialPort.Parity = Parity.None;
@@ -37,7 +33,7 @@ namespace PrinterDemo
             {
                 // Error handling to remind user to reset arduino
                 MessageBox.Show("COM port not detected! Pls reset COM at Arduino!", "Error", MessageBoxButtons.OK);
-                System.Environment.Exit(999);
+                //System.Environment.Exit(999);
             }
 
             // Update the label of the gate
@@ -47,8 +43,11 @@ namespace PrinterDemo
         // Reprint button event
         private void btn_print_Click(object sender, EventArgs e)
         {
+            TB_ManualCount.Visible = false;
+            LABEL_COUNT.Text = TB_ManualCount.Text;
             // If user press reprint, the counter should not increase
             PrintDemoLabel(true);
+            btn_print.Text = "Re-Print";
         }
 
         // Handle serial com incoming data
@@ -77,13 +76,20 @@ namespace PrinterDemo
             // Update the label for counter.
             // if reprtint, do not increment the counter.
             String printformat = UpdateDB(reprint);
-
+            // Update the counter at here
+            LABEL_COUNT.Invoke(new EventHandler(delegate
+            {
+                LABEL_COUNT.Text = printformat.Split('/').Last();
+            }));
+            String gatePrint = "Gate: " + printformat.Split('/')[1];
+            String CountPrint = "Counter: " + printformat.Split('/').Last();
             TSCLIB_DLL.openport("TSC TDP-225");                                                 //Open specified printer driver
             TSCLIB_DLL.setup("25", "400", "1", "8", "1", "6", "250");                           //Setup the media size and sensor type info
             TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-            TSCLIB_DLL.barcode("50", "450", "128", "100", "1", "270", "2", "2", printformat);   //Drawing barcode
-            TSCLIB_DLL.printerfont("150", "480", "5", "90", "1", "1", printformat);             //Drawing printer font
-            TSCLIB_DLL.sendcommand($"QRCODE 30,0,M,7,M,0,M2,S1,\"A{printformat}\"");            //Draw QR Code
+            TSCLIB_DLL.barcode("50", "470", "128", "100", "1", "270", "2", "2", printformat);   //Drawing barcode
+            TSCLIB_DLL.printerfont("140", "480", "5", "90", "1", "1", gatePrint);               //Print Gate number
+            TSCLIB_DLL.printerfont("180", "480", "5", "90", "1", "1", CountPrint);              //Print Ticket Counter
+            TSCLIB_DLL.sendcommand($"QRCODE 20,0,M,7,M,0,M2,S1,\"A{printformat}\"");            //Draw QR Code
             TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
             TSCLIB_DLL.closeport();                                                             //Close specified printer driver
     }
@@ -123,7 +129,8 @@ namespace PrinterDemo
 
         private void Timer_time_Tick(object sender, EventArgs e)
         {
-            LABEL_TIME.Text = DateTime.Now.ToString();
+            LABEL_DATE.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            LABEL_TIME.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private String UpdateDB(bool ReprintFlag)
@@ -175,7 +182,13 @@ namespace PrinterDemo
                             {
                                 count += 1;
                             }
-                            LABEL_COUNT.Text = count.ToString();
+                            else
+                            {
+                                if (btn_print.Text == "Manual Print")
+                                {
+                                    count = Int32.Parse(TB_ManualCount.Text);
+                                }
+                            }
                         }
                     }
                     else
@@ -192,7 +205,7 @@ namespace PrinterDemo
 
                 }
             }
-            retPrint = current_date +"|" +gate + "|" +count.ToString();
+            retPrint = current_date +"/" +gate + "/" +count.ToString();
             return retPrint;
         }
 
@@ -212,6 +225,42 @@ namespace PrinterDemo
                 this.LABEL_GATE_NO.Text = "Problem! Please contact support!";
             }
             testDialog.Dispose();
+        }
+
+        private void up_arrow_Click(object sender, EventArgs e)
+        {
+            TB_ManualCount.Visible = true;
+            TB_ManualCount.Text = (Int32.Parse(TB_ManualCount.Text) + 1).ToString();
+            btn_print.Text = "Manual Print";
+        }
+
+        private void down_arrow_Click(object sender, EventArgs e)
+        {
+            TB_ManualCount.Visible = true;
+            if (Int32.Parse(TB_ManualCount.Text) > 0)
+            {
+                TB_ManualCount.Text = (Int32.Parse(TB_ManualCount.Text) - 1).ToString();
+            }
+            else
+            {
+                TB_ManualCount.Text = "0";
+            }
+            btn_print.Text = "Manual Print";
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                down_arrow.Visible = true;
+                up_arrow.Visible = true;
+            }
+            else
+            {
+                // Error handling to remind user to reset arduino
+                MessageBox.Show("Please restart the program", "Restart Needed", MessageBoxButtons.OK);
+                System.Environment.Exit(999);
+            }
         }
     }
 }
