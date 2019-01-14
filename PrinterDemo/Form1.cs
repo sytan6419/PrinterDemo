@@ -55,14 +55,17 @@ namespace PrinterDemo
                             object sender,
                             SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
-            string indata = sp.ReadExisting();
-
-            // If received "D" from arduino Port, sensor is triggered.
-            if (indata.Contains("D"))
+            if (!checkBox1.Checked)
             {
-                // If sensor detect door open, update the counter to increase by 1
-                PrintDemoLabel(false);
+                SerialPort sp = (SerialPort)sender;
+                string indata = sp.ReadExisting();
+
+                // If received "D" from arduino Port, sensor is triggered.
+                if (indata.Contains("D"))
+                {
+                    // If sensor detect door open, update the counter to increase by 1
+                    PrintDemoLabel(false);
+                }
             }
         }
 
@@ -84,12 +87,12 @@ namespace PrinterDemo
             String gatePrint = "Gate: " + printformat.Split('/')[1];
             String CountPrint = "Counter: " + printformat.Split('/').Last();
             TSCLIB_DLL.openport("TSC TDP-225");                                                 //Open specified printer driver
-            TSCLIB_DLL.setup("25", "400", "1", "8", "1", "6", "250");                           //Setup the media size and sensor type info
+            TSCLIB_DLL.setup("40", "450", "12", "8", "1", "6", "300");                           //Setup the media size and sensor type info
             TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-            TSCLIB_DLL.barcode("50", "470", "128", "100", "1", "270", "2", "2", printformat);   //Drawing barcode
+            TSCLIB_DLL.barcode("100", "470", "128", "100", "0", "270", "2", "2", printformat);   //Drawing barcode
             TSCLIB_DLL.printerfont("140", "480", "5", "90", "1", "1", gatePrint);               //Print Gate number
-            TSCLIB_DLL.printerfont("180", "480", "5", "90", "1", "1", CountPrint);              //Print Ticket Counter
-            TSCLIB_DLL.sendcommand($"QRCODE 20,0,M,7,M,0,M2,S1,\"A{printformat}\"");            //Draw QR Code
+            TSCLIB_DLL.printerfont("210", "480", "5", "90", "1", "1", CountPrint);              //Print Ticket Counter
+            TSCLIB_DLL.sendcommand($"QRCODE 80,0,M,7,M,0,M2,S1,\"A{printformat}\"");            //Draw QR Code
             TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
             TSCLIB_DLL.closeport();                                                             //Close specified printer driver
     }
