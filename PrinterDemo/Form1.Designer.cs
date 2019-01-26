@@ -61,10 +61,11 @@
             // 
             // btn_print
             // 
-            this.btn_print.Location = new System.Drawing.Point(312, 189);
-            this.btn_print.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btn_print.Location = new System.Drawing.Point(959, 500);
+            this.btn_print.Margin = new System.Windows.Forms.Padding(4);
             this.btn_print.Name = "btn_print";
-            this.btn_print.Size = new System.Drawing.Size(106, 41);
+            this.btn_print.Size = new System.Drawing.Size(212, 79);
             this.btn_print.TabIndex = 0;
             this.btn_print.Text = "Re-Print";
             this.btn_print.UseVisualStyleBackColor = true;
@@ -72,88 +73,96 @@
             // 
             // PB_Sunway
             // 
+            this.PB_Sunway.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.PB_Sunway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PB_Sunway.Enabled = false;
             this.PB_Sunway.Image = ((System.Drawing.Image)(resources.GetObject("PB_Sunway.Image")));
             this.PB_Sunway.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Sunway.InitialImage")));
-            this.PB_Sunway.Location = new System.Drawing.Point(52, 2);
-            this.PB_Sunway.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PB_Sunway.Location = new System.Drawing.Point(228, -1);
+            this.PB_Sunway.Margin = new System.Windows.Forms.Padding(4);
             this.PB_Sunway.Name = "PB_Sunway";
-            this.PB_Sunway.Size = new System.Drawing.Size(332, 119);
+            this.PB_Sunway.Size = new System.Drawing.Size(974, 358);
             this.PB_Sunway.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PB_Sunway.TabIndex = 1;
             this.PB_Sunway.TabStop = false;
             // 
             // PB_Brady
             // 
+            this.PB_Brady.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.PB_Brady.Image = ((System.Drawing.Image)(resources.GetObject("PB_Brady.Image")));
             this.PB_Brady.InitialImage = ((System.Drawing.Image)(resources.GetObject("PB_Brady.InitialImage")));
-            this.PB_Brady.Location = new System.Drawing.Point(300, 256);
-            this.PB_Brady.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PB_Brady.Location = new System.Drawing.Point(1122, 765);
+            this.PB_Brady.Margin = new System.Windows.Forms.Padding(4);
             this.PB_Brady.Name = "PB_Brady";
-            this.PB_Brady.Size = new System.Drawing.Size(130, 33);
+            this.PB_Brady.Size = new System.Drawing.Size(260, 63);
             this.PB_Brady.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PB_Brady.TabIndex = 2;
             this.PB_Brady.TabStop = false;
             // 
             // LABEL_GATE
             // 
+            this.LABEL_GATE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LABEL_GATE.AutoSize = true;
             this.LABEL_GATE.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LABEL_GATE.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_GATE.Image")));
-            this.LABEL_GATE.Location = new System.Drawing.Point(18, 148);
-            this.LABEL_GATE.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_GATE.Location = new System.Drawing.Point(36, 378);
+            this.LABEL_GATE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_GATE.Name = "LABEL_GATE";
-            this.LABEL_GATE.Size = new System.Drawing.Size(39, 13);
+            this.LABEL_GATE.Size = new System.Drawing.Size(75, 25);
             this.LABEL_GATE.TabIndex = 3;
             this.LABEL_GATE.Text = "GATE:";
+            this.LABEL_GATE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LABEL_COUNTER
             // 
+            this.LABEL_COUNTER.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LABEL_COUNTER.AutoSize = true;
             this.LABEL_COUNTER.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LABEL_COUNTER.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_COUNTER.Image")));
-            this.LABEL_COUNTER.Location = new System.Drawing.Point(18, 175);
-            this.LABEL_COUNTER.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_COUNTER.Location = new System.Drawing.Point(36, 430);
+            this.LABEL_COUNTER.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_COUNTER.Name = "LABEL_COUNTER";
-            this.LABEL_COUNTER.Size = new System.Drawing.Size(47, 13);
+            this.LABEL_COUNTER.Size = new System.Drawing.Size(94, 25);
             this.LABEL_COUNTER.TabIndex = 3;
             this.LABEL_COUNTER.Text = "Counter:";
             // 
             // LABEL_GATE_NO
             // 
+            this.LABEL_GATE_NO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LABEL_GATE_NO.AutoSize = true;
             this.LABEL_GATE_NO.BackColor = System.Drawing.Color.Transparent;
             this.LABEL_GATE_NO.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LABEL_GATE_NO.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_GATE_NO.Image")));
-            this.LABEL_GATE_NO.Location = new System.Drawing.Point(71, 148);
-            this.LABEL_GATE_NO.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_GATE_NO.Location = new System.Drawing.Point(142, 378);
+            this.LABEL_GATE_NO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_GATE_NO.Name = "LABEL_GATE_NO";
-            this.LABEL_GATE_NO.Size = new System.Drawing.Size(53, 13);
+            this.LABEL_GATE_NO.Size = new System.Drawing.Size(104, 25);
             this.LABEL_GATE_NO.TabIndex = 3;
             this.LABEL_GATE_NO.Text = "Not setup";
             // 
             // LABEL_COUNT
             // 
+            this.LABEL_COUNT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LABEL_COUNT.AutoSize = true;
             this.LABEL_COUNT.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LABEL_COUNT.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_COUNT.Image")));
-            this.LABEL_COUNT.Location = new System.Drawing.Point(71, 175);
-            this.LABEL_COUNT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_COUNT.Location = new System.Drawing.Point(142, 430);
+            this.LABEL_COUNT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_COUNT.Name = "LABEL_COUNT";
-            this.LABEL_COUNT.Size = new System.Drawing.Size(13, 13);
+            this.LABEL_COUNT.Size = new System.Drawing.Size(24, 25);
             this.LABEL_COUNT.TabIndex = 3;
             this.LABEL_COUNT.Text = "0";
             // 
             // LABEL_DATE
             // 
+            this.LABEL_DATE.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LABEL_DATE.AutoSize = true;
             this.LABEL_DATE.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LABEL_DATE.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_DATE.Image")));
-            this.LABEL_DATE.Location = new System.Drawing.Point(333, 134);
-            this.LABEL_DATE.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_DATE.Location = new System.Drawing.Point(952, 388);
+            this.LABEL_DATE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_DATE.Name = "LABEL_DATE";
-            this.LABEL_DATE.Size = new System.Drawing.Size(61, 13);
+            this.LABEL_DATE.Size = new System.Drawing.Size(120, 25);
             this.LABEL_DATE.TabIndex = 4;
             this.LABEL_DATE.Text = "DD:MM:YY";
             // 
@@ -165,11 +174,12 @@
             // 
             // down_arrow
             // 
+            this.down_arrow.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.down_arrow.Image = ((System.Drawing.Image)(resources.GetObject("down_arrow.Image")));
-            this.down_arrow.Location = new System.Drawing.Point(271, 211);
-            this.down_arrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.down_arrow.Location = new System.Drawing.Point(745, 543);
+            this.down_arrow.Margin = new System.Windows.Forms.Padding(4);
             this.down_arrow.Name = "down_arrow";
-            this.down_arrow.Size = new System.Drawing.Size(18, 21);
+            this.down_arrow.Size = new System.Drawing.Size(115, 84);
             this.down_arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.down_arrow.TabIndex = 6;
             this.down_arrow.TabStop = false;
@@ -178,11 +188,12 @@
             // 
             // up_arrow
             // 
+            this.up_arrow.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.up_arrow.Image = ((System.Drawing.Image)(resources.GetObject("up_arrow.Image")));
-            this.up_arrow.Location = new System.Drawing.Point(271, 183);
-            this.up_arrow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.up_arrow.Location = new System.Drawing.Point(745, 451);
+            this.up_arrow.Margin = new System.Windows.Forms.Padding(4);
             this.up_arrow.Name = "up_arrow";
-            this.up_arrow.Size = new System.Drawing.Size(18, 21);
+            this.up_arrow.Size = new System.Drawing.Size(115, 84);
             this.up_arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.up_arrow.TabIndex = 5;
             this.up_arrow.TabStop = false;
@@ -191,21 +202,23 @@
             // 
             // TB_ManualCount
             // 
-            this.TB_ManualCount.Location = new System.Drawing.Point(174, 202);
-            this.TB_ManualCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TB_ManualCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.TB_ManualCount.Location = new System.Drawing.Point(589, 524);
+            this.TB_ManualCount.Margin = new System.Windows.Forms.Padding(4);
             this.TB_ManualCount.Name = "TB_ManualCount";
-            this.TB_ManualCount.Size = new System.Drawing.Size(91, 20);
+            this.TB_ManualCount.Size = new System.Drawing.Size(105, 31);
             this.TB_ManualCount.TabIndex = 7;
             this.TB_ManualCount.Text = "0";
             this.TB_ManualCount.Visible = false;
             // 
             // checkBox1
             // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(193, 274);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox1.Location = new System.Drawing.Point(897, 783);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 17);
+            this.checkBox1.Size = new System.Drawing.Size(191, 29);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "ByPass Sensor";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -213,33 +226,36 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 124);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(1, 335);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(444, 125);
+            this.pictureBox1.Size = new System.Drawing.Size(1433, 411);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
             // LABEL_TIME
             // 
+            this.LABEL_TIME.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LABEL_TIME.AutoSize = true;
             this.LABEL_TIME.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LABEL_TIME.Image = ((System.Drawing.Image)(resources.GetObject("LABEL_TIME.Image")));
-            this.LABEL_TIME.Location = new System.Drawing.Point(333, 152);
-            this.LABEL_TIME.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LABEL_TIME.Location = new System.Drawing.Point(954, 430);
+            this.LABEL_TIME.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LABEL_TIME.Name = "LABEL_TIME";
-            this.LABEL_TIME.Size = new System.Drawing.Size(61, 13);
+            this.LABEL_TIME.Size = new System.Drawing.Size(118, 25);
             this.LABEL_TIME.TabIndex = 11;
             this.LABEL_TIME.Text = "HH:MM:SS";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(442, 297);
+            this.ClientSize = new System.Drawing.Size(1431, 829);
             this.Controls.Add(this.LABEL_TIME);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.TB_ManualCount);
@@ -254,11 +270,12 @@
             this.Controls.Add(this.PB_Sunway);
             this.Controls.Add(this.btn_print);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Printer Demo";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.PB_Sunway)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Brady)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.down_arrow)).EndInit();
