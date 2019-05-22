@@ -29,7 +29,7 @@ void loop()
   // to ignore any noise on the circuit, toggle the output pin and remember
   // the time
   // read the pushbutton input pin:
-  buttonState = !digitalRead(buttonPin);
+  buttonState = digitalRead(buttonPin);
 
   // compare the buttonState to its previous state
   if (buttonState != lastButtonState) {
