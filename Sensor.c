@@ -6,7 +6,7 @@
  */
 
 // this constant won't change:
-const int  buttonPin = 5;    //8    // the pin that the pushbutton is attached to
+const int  buttonPin = 9;    // the pin that the pushbutton is attached to pin D9
 const int ledPin = 13;       // the pin that the LED is attached to
 
 // Variables will change:
